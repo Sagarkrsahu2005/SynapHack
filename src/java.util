@@ -1,0 +1,37 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class CubeDrawer extends JPanel {
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(2));
+
+        // Front square
+        int x1 = 100, y1 = 100, size = 100;
+        g2.drawRect(x1, y1, size, size);
+
+        // Offset for the back square
+        int offset = 40;
+        int x2 = x1 + offset;
+        int y2 = y1 + offset;
+        g2.drawRect(x2, y2, size, size);
+
+        // Connect corners to form cube
+        g2.drawLine(x1, y1, x2, y2);                         // top-left
+        g2.drawLine(x1 + size, y1, x2 + size, y2);           // top-right
+        g2.drawLine(x1, y1 + size, x2, y2 + size);           // bottom-left
+        g2.drawLine(x1 + size, y1 + size, x2 + size, y2 + size); // bottom-right
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Cube Drawing");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 400);
+        frame.add(new CubeDrawer());
+        frame.setVisible(true);
+    }
+}
